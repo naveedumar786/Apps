@@ -24,25 +24,25 @@ public class GestureDemo extends ApplicationActivity implements SwipeInterface {
 
 	@Override
 	public void bottom2top(View v) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public void left2right(View v) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public void right2left(View v) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public void top2bottom(View v) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
