@@ -6,13 +6,10 @@ import com.example.interfaces.SwipeInterface;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class GestureDemo extends ApplicationActivity implements SwipeInterface,
@@ -44,16 +41,21 @@ public class GestureDemo extends ApplicationActivity implements SwipeInterface,
 	@Override
 	public void left2right(View v) {
 
-		if (pageCount == 0) {
-			return;
-		}
 		--pageCount;
+		mPagerFragment = new PagerFragment();
 		replaceFragment(mPagerFragment);
 	}
 
 	@Override
 	public void right2left(View v) {
+
+		if (pageCount == 0) {
+			return;
+		}
+
 		++pageCount;
+
+		mPagerFragment = new PagerFragment();
 		replaceFragment(mPagerFragment);
 	}
 
@@ -80,20 +82,22 @@ public class GestureDemo extends ApplicationActivity implements SwipeInterface,
 
 		Bundle args = new Bundle();
 		args.putInt("pageCount", pageCount);
-		fragment.setArguments(args);
 
-		// fragment not in back stack create it
+		fragment.setArguments(args);
+		if (mPagerFragment.isVisible()) {
+
+			getSupportFragmentManager()
+					.beginTransaction()
+					.remove(getSupportFragmentManager().findFragmentByTag(
+							backStateName)).commit();
+		}
 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-		// ft.setCustomAnimations(R.anim.slide_in_left,
-		// R.anim.slide_out_left,
-		// R.anim.slide_in_right, R.anim.slide_out_right);
-
 		ft.replace(R.id.rlFragmentContainer, fragment, backStateName);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		ft.addToBackStack(null);
 		ft.commit();
+
 	}
 
 	@Override

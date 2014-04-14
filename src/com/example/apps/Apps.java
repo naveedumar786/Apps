@@ -10,7 +10,7 @@ import android.graphics.Typeface;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-public class SplashActivity extends Activity {
+public class Apps extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public class SplashActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 
-			int userId = Helper.readPreferences(SplashActivity.this, "userId");
+			int userId = Helper.readPreferences(Apps.this, "userId");
 			Helper.log("e", getString(R.string.app_name), "userId= " + userId);
 			Intent intent;
 			userId = 1;
 			if (userId == -1) {
-				intent = new Intent(SplashActivity.this, LoginActivity.class);
+				intent = new Intent(Apps.this, LoginActivity.class);
 			} else {
-				intent = new Intent(SplashActivity.this, MainActivity.class);
+				intent = new Intent(Apps.this, MainActivity.class);
 			}
 			startActivity(intent);
 			finish();
